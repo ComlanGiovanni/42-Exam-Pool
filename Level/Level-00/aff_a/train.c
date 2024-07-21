@@ -6,7 +6,7 @@
 /*   By: gicomlan <gicomlan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 12:28:27 by gicomlan          #+#    #+#             */
-/*   Updated: 2024/07/21 23:43:14 by gicomlan         ###   ########.fr       */
+/*   Updated: 2024/07/22 00:05:14 by gicomlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,31 @@ static void	ft_putchar_fd(char character,	int file_descriptor)
 		write(file_descriptor, &character, sizeof(char));
 }
 
-static void	ft_aff_a(char *str)
+static void	ft_aff_a(char *string)
 {
-	size_t	index;
-
-	index = 0x0;
-	while (str[index] != '\0')
+	while (*string)
 	{
-		if (str[index] == 'a')
+		if (*string == 'a')
 		{
-			ft_putchar_fd(str[index], STDOUT_FILENO);
+			ft_putchar_fd(*string, STDOUT_FILENO);
 			return ;
 		}
-		index++;
+		string++;
 	}
 }
+
+// static void	ft_aff_a(char *str)
+// {
+// 	size_t	index;
+
+// 	index = 0x0;
+// 	while (str[index] != '\0')
+// 	{
+// 		if (str[index] == 'a')
+// 		{
+// 			ft_putchar_fd(str[index], STDOUT_FILENO);
+// 			return ;
+// 		}
+// 		index++;
+// 	}
+// }
