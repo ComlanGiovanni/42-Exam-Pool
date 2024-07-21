@@ -6,23 +6,30 @@
 /*   By: gicomlan <gicomlan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/21 17:29:01 by gicomlan          #+#    #+#             */
-/*   Updated: 2024/07/21 23:57:27 by gicomlan         ###   ########.fr       */
+/*   Updated: 2024/07/22 00:41:04 by gicomlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h> // write
 #include <stdlib.h> // EXIT_SUCCESS
 
-static void	ft_putchar_fd(char character, int file_descriptor);
+static void	ft_putendl_fd(char *string, int file_descriptor);
 static void	ft_putstr_fd(char *string, int file_descriptor);
+static void	ft_putchar_fd(char character, int file_descriptor);
 
 int	main(void)
 {
 	char	*string_to_display;
 
-	string_to_display = "Hello World!";
-	ft_putstr_fd(string_to_display, STDOUT_FILENO);
+	string_to_display = "Hello World!\n";
+	ft_putendl_fd(string_to_display, STDOUT_FILENO);
 	return (EXIT_SUCCESS);
+}
+
+static	void	ft_putendl_fd(char *string, int file_descriptor)
+{
+	ft_putstr_fd(string, file_descriptor);
+	ft_putchar_fd(0x0a, file_descriptor);
 }
 
 static void	ft_putchar_fd(char character, int file_descriptor)
