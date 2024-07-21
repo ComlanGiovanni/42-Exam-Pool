@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   aff_a.c                                            :+:      :+:    :+:   */
+/*   train.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gicomlan <gicomlan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/21 13:02:04 by gicomlan          #+#    #+#             */
-/*   Updated: 2024/07/21 23:42:58 by gicomlan         ###   ########.fr       */
+/*   Created: 2024/07/21 22:07:05 by gicomlan          #+#    #+#             */
+/*   Updated: 2024/07/21 23:52:14 by gicomlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,13 @@
 #include <stdlib.h> // EXIT_SUCCESS
 
 static void	ft_putchar_fd(char character,	int file_descriptor);
-static void	ft_aff_a(char *str);
+static int	ft_islower(int character);
+static int	ft_toupper(int character);
+static void	ft_maff_rev_alpha(void);
 
-int	main(int argc, char **argv)
+int	main(void)
 {
-	if (argc == 0x2)
-		ft_aff_a(argv[0x1]);
-	else
-		ft_putchar_fd('a', STDOUT_FILENO);
-	ft_putchar_fd('\n', STDOUT_FILENO);
+	ft_maff_rev_alpha();
 	return (EXIT_SUCCESS);
 }
 
@@ -32,18 +30,30 @@ static void	ft_putchar_fd(char character,	int file_descriptor)
 		write(file_descriptor, &character, sizeof(char));
 }
 
-static void	ft_aff_a(char *str)
+static int	ft_islower(int character)
 {
-	size_t	index;
+	return (((character >= 'a') && (character <= 'z')));
+}
 
-	index = 0x0;
-	while (str[index] != '\0')
+static int	ft_toupper(int character)
+{
+	if (ft_islower(character))
+		character = (character - ' ');
+	return (character);
+}
+
+static void	ft_maff_rev_alpha(void)
+{
+	char	alphabet;
+
+	alphabet = 'z';
+	while (alphabet >= 'a')
 	{
-		if (str[index] == 'a')
-		{
-			ft_putchar_fd(str[index], STDOUT_FILENO);
-			return ;
-		}
-		index++;
+		if ((alphabet % 0x2) == 0x0)
+			ft_putchar_fd(alphabet, STDOUT_FILENO);
+		else
+			ft_putchar_fd(ft_toupper(alphabet), STDOUT_FILENO);
+		alphabet--;
 	}
+	ft_putchar_fd('\n', STDOUT_FILENO);
 }

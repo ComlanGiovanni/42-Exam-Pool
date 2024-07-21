@@ -1,28 +1,59 @@
-#include <unistd.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   maff_alpha.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gicomlan <gicomlan@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/21 22:05:27 by gicomlan          #+#    #+#             */
+/*   Updated: 2024/07/21 23:50:00 by gicomlan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-void ft_putchar(char c)
+#include <unistd.h> // write
+#include <stdlib.h> // EXIT_SUCCESS
+
+static void	ft_putchar_fd(char character,	int file_descriptor);
+static int	ft_islower(int character);
+static int	ft_toupper(int character);
+static void	ft_maff_alpha(void);
+
+int	main(void)
 {
-    write(1, &c, 1);
+	ft_maff_alpha();
+	return (EXIT_SUCCESS);
 }
 
-void maff_alpha(void)
+static void	ft_putchar_fd(char character,	int file_descriptor)
 {
-    char alphabet;
-
-    alphabet = 'a';
-    while (alphabet <= 'z')
-    {
-        if ((alphabet % 2) == 0)
-            ft_putchar(alphabet - ' ');
-        else
-            ft_putchar(alphabet);
-        alphabet++;
-    }
-    ft_putchar('\n');
+	if (file_descriptor >= 0x0)
+		write(file_descriptor, &character, sizeof(char));
 }
 
-int main (void)
+static int	ft_islower(int character)
 {
-    maff_alpha();
-    return (0);
+	return (((character >= 'a') && (character <= 'z')));
+}
+
+static int	ft_toupper(int character)
+{
+	if (ft_islower(character))
+		character = (character - ' ');
+	return (character);
+}
+
+static void	ft_maff_alpha(void)
+{
+	char	alphabet;
+
+	alphabet = 'a';
+	while (alphabet <= 'z')
+	{
+		if ((alphabet % 0x2) == 0x0)
+			ft_putchar_fd(ft_toupper(alphabet), STDOUT_FILENO);
+		else
+			ft_putchar_fd(alphabet, STDOUT_FILENO);
+		alphabet++;
+	}
+	ft_putchar_fd('\n', STDOUT_FILENO);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   only_z.c                                           :+:      :+:    :+:   */
+/*   train.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gicomlan <gicomlan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/21 14:38:03 by gicomlan          #+#    #+#             */
-/*   Updated: 2024/07/21 23:53:03 by gicomlan         ###   ########.fr       */
+/*   Created: 2024/07/21 18:13:56 by gicomlan          #+#    #+#             */
+/*   Updated: 2024/07/21 23:54:04 by gicomlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,24 @@
 #include <stdlib.h> // EXIT_SUCCESS
 
 static void	ft_putchar_fd(char character, int file_descriptor);
+static void	ft_print_range_recursive(int digit, int end, int step);
+
+int	main(void)
+{
+	ft_print_range_recursive(0x0, 9, 0x1);
+	return (EXIT_SUCCESS);
+}
 
 static void	ft_putchar_fd(char character, int file_descriptor)
 {
 	if (file_descriptor >= 0x0)
-		write(file_descriptor, &character, sizeof(char));
+		write (file_descriptor, &character, sizeof(char));
 }
 
-int	main(void)
+static void	ft_print_range_recursive(int digit, int end, int step)
 {
-	char	character_to_display;
-
-	character_to_display = 'z';
-	ft_putchar_fd(character_to_display, STDOUT_FILENO);
-	return (EXIT_SUCCESS);
+	if (digit == end + step)
+		return ;
+	ft_putchar_fd((digit + '0'), STDOUT_FILENO);
+	ft_print_range_recursive((digit + step), end, step);
 }

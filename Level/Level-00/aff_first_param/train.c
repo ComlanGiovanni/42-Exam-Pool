@@ -1,49 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   aff_a.c                                            :+:      :+:    :+:   */
+/*   train.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gicomlan <gicomlan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/21 13:02:04 by gicomlan          #+#    #+#             */
-/*   Updated: 2024/07/21 23:42:58 by gicomlan         ###   ########.fr       */
+/*   Created: 2024/07/21 22:32:56 by gicomlan          #+#    #+#             */
+/*   Updated: 2024/07/21 23:43:31 by gicomlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h> // write
-#include <stdlib.h> // EXIT_SUCCESS
+#include <unistd.h>
+#include <stdlib.h>
 
-static void	ft_putchar_fd(char character,	int file_descriptor);
-static void	ft_aff_a(char *str);
+static	void	ft_putchar_fd(char character, int file_descriptor);
+static	void	ft_putstr_fd(char *string, int file_descriptor);
 
 int	main(int argc, char **argv)
 {
-	if (argc == 0x2)
-		ft_aff_a(argv[0x1]);
-	else
-		ft_putchar_fd('a', STDOUT_FILENO);
+	if (argc > 0x1)
+		ft_putstr_fd(argv[0x1], STDOUT_FILENO);
 	ft_putchar_fd('\n', STDOUT_FILENO);
 	return (EXIT_SUCCESS);
 }
 
-static void	ft_putchar_fd(char character,	int file_descriptor)
+static	void	ft_putchar_fd(char character, int file_descriptor)
 {
 	if (file_descriptor >= 0x0)
 		write(file_descriptor, &character, sizeof(char));
 }
 
-static void	ft_aff_a(char *str)
+static	void	ft_putstr_fd(char *string, int file_descriptor)
 {
-	size_t	index;
-
-	index = 0x0;
-	while (str[index] != '\0')
-	{
-		if (str[index] == 'a')
-		{
-			ft_putchar_fd(str[index], STDOUT_FILENO);
-			return ;
-		}
-		index++;
-	}
+	if (string == NULL)
+		string = "(null)";
+	if (file_descriptor >= 0x0)
+		while (*string)
+			write(file_descriptor, string++, sizeof(char));
 }

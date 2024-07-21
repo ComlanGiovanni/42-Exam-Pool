@@ -1,49 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   aff_a.c                                            :+:      :+:    :+:   */
+/*   train.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gicomlan <gicomlan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/21 13:02:04 by gicomlan          #+#    #+#             */
-/*   Updated: 2024/07/21 23:42:58 by gicomlan         ###   ########.fr       */
+/*   Created: 2024/07/21 23:23:41 by gicomlan          #+#    #+#             */
+/*   Updated: 2024/07/21 23:46:36 by gicomlan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h> // write
 #include <stdlib.h> // EXIT_SUCCESS
 
-static void	ft_putchar_fd(char character,	int file_descriptor);
-static void	ft_aff_a(char *str);
+static	void	ft_putchar_fd(char character, int file_descriptor);
+static	void	ft_print_range(int start, int end, int step);
 
-int	main(int argc, char **argv)
+int	main(void)
 {
-	if (argc == 0x2)
-		ft_aff_a(argv[0x1]);
-	else
-		ft_putchar_fd('a', STDOUT_FILENO);
-	ft_putchar_fd('\n', STDOUT_FILENO);
+	ft_print_range(0x0, 0x9, 0x1);
 	return (EXIT_SUCCESS);
 }
 
-static void	ft_putchar_fd(char character,	int file_descriptor)
+static	void	ft_putchar_fd(char character, int file_descriptor)
 {
 	if (file_descriptor >= 0x0)
 		write(file_descriptor, &character, sizeof(char));
 }
 
-static void	ft_aff_a(char *str)
+static	void	ft_print_range(int start, int end, int step)
 {
-	size_t	index;
-
-	index = 0x0;
-	while (str[index] != '\0')
+	while (start < end)
 	{
-		if (str[index] == 'a')
-		{
-			ft_putchar_fd(str[index], STDOUT_FILENO);
-			return ;
-		}
-		index++;
+		ft_putchar_fd((start + '0'), STDOUT_FILENO);
+		start += step;
 	}
+	ft_putchar_fd((start + '0'), STDOUT_FILENO);
 }
